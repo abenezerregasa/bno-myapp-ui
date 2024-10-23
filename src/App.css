@@ -1,42 +1,110 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Background and full page centering */
+.home-container {
+  background-image: url('https://raw.githubusercontent.com/abenezerregasa/images/refs/heads/main/Screenshot%20from%202024-10-22%2017-23-29.png'); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
+/* Logo Styling */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  width: 180px; /* Increased logo size */
+  margin-bottom: 30oopx;
+  transition: transform 0.3s ease; /* Smooth transition for hover effects */
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  transform: scale(1.1) rotate(5deg); /* Added slight rotation to the hover effect */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Central Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button-container .btn {
+  font-size: 1.25rem;
+  padding: 12px 25px; /* Increased padding for more emphasis */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Hover Effect */
+.button-container .btn:hover {
+  background-color: #004085; /* Darker shade on hover for primary buttons */
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+.footer-text {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logo {
+    width: 120px; /* Make logo smaller on mobile */
   }
-  to {
-    transform: rotate(360deg);
+
+  .btn-lg {
+    width: 100%; /* Make buttons full-width on mobile */
+    margin-bottom: 15px;
+  }
+
+  .button-container {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+  }
+
+  .footer-text {
+    font-size: 0.75rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Catchy Linux Day Message Styling */
+.display-4 {
+  color: #4CAF50; /* Linux-friendly green */
+  text-shadow: 2px 2px #000;
 }
 
-.card {
-  padding: 2em;
+.lead {
+  font-size: 1.5rem;
+  color: #050000;
+  margin-bottom: 20px;
 }
 
-.read-the-docs {
-  color: #888;
+.sub-text {
+  font-size: 1.25rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* Footer Styling */
+footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* Global Background */
+body, html {
+  background-image: url('https://raw.githubusercontent.com/abenezerregasa/images/refs/heads/main/Screenshot%20from%202024-10-22%2017-23-29.png'); /* Replace with your image */
+  background-size: cover; /* Ensure the image covers the entire viewport */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the background */
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Hide any overflow */
 }
