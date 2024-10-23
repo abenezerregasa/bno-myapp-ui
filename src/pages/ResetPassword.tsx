@@ -11,7 +11,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://clientibno-320506a6924a.herokuapp.com/api/reset-password', { email });
+      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/reset-password', { email });
       setMessage(response.data.message); // Show success message
       setError(''); // Clear any errors
     } catch (err: any) {

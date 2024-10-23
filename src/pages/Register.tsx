@@ -30,7 +30,7 @@ const Register = () => {
     const fullPhoneNumber = formData.country_code + formData.phone_number;
     
     try {
-      const response = await axios.post('https://clientibno-320506a6924a.herokuapp.com/api/register', {
+      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/register', {
         ...formData,
         phone_number: fullPhoneNumber, // Pass full phone number with country code
       });
