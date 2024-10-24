@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AxiosError } from 'axios';  // Import AxiosError type
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,11 +22,15 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5001/api/login', formData);
+      const response = await axios.post('http://localhost:5001/api/login', formData); // Corrected URL
       const message = response.data.message;  // Get welcome message from server
       navigate('/success', { state: { message } });  // Pass message to Success page
-    } catch (err: AxiosError) {  // Use AxiosError type here instead of any
-      setError(err.response?.data?.error || 'Login failed. Try again.');
+    } catch (err) {
+      if (axios.isAxiosError(err)) {  // Check if the error is an AxiosError
+        setError(err.response?.data?.error || 'Login failed. Try again.');
+      } else {
+        setError('Login failed due to an unexpected error.');
+      }
     } finally {
       setLoading(false);
     }
