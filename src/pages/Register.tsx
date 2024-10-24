@@ -27,6 +27,10 @@ const Register = () => {
     setError('');  // Clear previous error
 
     try {
+
+
+
+      
       const response = await axios.post(
         'https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/register', 
         formData,
