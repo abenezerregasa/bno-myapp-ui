@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5001/api/login', formData); // Corrected URL
+      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/login', formData); // Corrected URL
       const message = response.data.message;  // Get welcome message from server
       navigate('/success', { state: { message } });  // Pass message to Success page
     } catch (err) {
