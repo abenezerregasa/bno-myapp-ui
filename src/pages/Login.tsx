@@ -21,13 +21,20 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');  // Clear previous error
+
     try {
-      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/login', formData); // Corrected URL
-      const message = response.data.message;  // Get welcome message from server
-      navigate('/success', { state: { message } });  // Pass message to Success page
-    } catch (err) {
-      if (axios.isAxiosError(err)) {  // Check if the error is an AxiosError
-        setError(err.response?.data?.error || 'Login failed. Try again.');
+      const response = await axios.post(
+        'https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/login',
+        formData,
+        { withCredentials: true }  // Ensure CORS credentials are sent
+      );
+      const message = response.data.message;
+      navigate('/success', { state: { message } });
+    } catch (err: any) {
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.error || 'Login failed. Please try again.';
+        setError(errorMessage);
       } else {
         setError('Login failed due to an unexpected error.');
       }
@@ -80,7 +87,6 @@ const Login = () => {
             {error && <div className="text-danger text-center mt-3">{error}</div>}
           </form>
 
-          {/* Link to reset password */}
           <div className="text-center mt-3">
             <Link to="/reset-password-request" className="btn btn-link">
               Forgot Password?

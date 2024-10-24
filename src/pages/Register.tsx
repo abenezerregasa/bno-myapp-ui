@@ -24,13 +24,20 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+    setError('');  // Clear previous error
+
     try {
-      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/register', formData);
-      const message = response.data.message;  // Get welcome message from server
-      navigate('/success', { state: { message } });  // Pass message to Success page
+      const response = await axios.post(
+        'https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/register', 
+        formData,
+        { withCredentials: true }  // Ensure CORS credentials are sent
+      );
+      const message = response.data.message;
+      navigate('/success', { state: { message } });
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Registration failed. Try again.');
+      // Improved error handling
+      const errorMessage = err.response?.data?.error || 'Registration failed. Please try again.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -39,10 +46,10 @@ const Register = () => {
   return (
     <motion.div
       className="container d-flex justify-content-center align-items-center vh-100"
-      initial={{ opacity: 0, y: 50 }}  // Start slightly down with opacity 0
-      animate={{ opacity: 1, y: 0 }}   // Animate to normal position
-      exit={{ opacity: 0, y: 50 }}     // Exit by fading and sliding down
-      transition={{ duration: 0.5 }}   // Animation duration
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="col-md-6">
         <div className="card p-4 shadow-sm">
