@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';  // Import motion
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';  // Assume custom CSS is here
 
+
+
 const App = () => {
   return (
     <motion.div

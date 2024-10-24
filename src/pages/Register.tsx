@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';  // Import motion
+import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Register = () => {
@@ -10,7 +10,6 @@ const Register = () => {
     last_name: '',
     email: '',
     phone_number: '',
-    country_code: '+39', // Default country code set to Italy
     password: '',
   });
 
@@ -18,7 +17,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -26,14 +25,8 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     
-    // Combine country code and phone number
-    const fullPhoneNumber = formData.country_code + formData.phone_number;
-    
     try {
-      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/register', {
-        ...formData,
-        phone_number: fullPhoneNumber, // Pass full phone number with country code
-      });
+      const response = await axios.post('http://localhost:5001/api/register', formData);
       const message = response.data.message;  // Get welcome message from server
       navigate('/success', { state: { message } });  // Pass message to Success page
     } catch (err: any) {
@@ -94,8 +87,6 @@ const Register = () => {
                 required
               />
             </div>
-            
- 
             <div className="form-group mb-3">
               <label htmlFor="phone_number">Phone Number</label>
               <input
@@ -109,7 +100,6 @@ const Register = () => {
                 required
               />
             </div>
-
             <div className="form-group mb-3">
               <label htmlFor="password">Password</label>
               <input

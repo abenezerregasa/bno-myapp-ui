@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AxiosError } from 'axios';  // Import AxiosError type
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -22,10 +23,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://bno-client-registration-57cf2c5fd63c.herokuapp.com/api/login', formData);
+      const response = await axios.post('http://localhost:5001/api/login', formData);
       const message = response.data.message;  // Get welcome message from server
       navigate('/success', { state: { message } });  // Pass message to Success page
-    } catch (err: any) {
+    } catch (err: AxiosError) {  // Use AxiosError type here instead of any
       setError(err.response?.data?.error || 'Login failed. Try again.');
     } finally {
       setLoading(false);
@@ -76,12 +77,12 @@ const Login = () => {
             {error && <div className="text-danger text-center mt-3">{error}</div>}
           </form>
 
+          {/* Link to reset password */}
           <div className="text-center mt-3">
-  <Link to="/reset-password" className="btn btn-link">
-    Forgot Password?
-  </Link>
-</div>
-
+            <Link to="/reset-password-request" className="btn btn-link">
+              Forgot Password?
+            </Link>
+          </div>
 
           <div className="text-center mt-4">
             <Link to="/" className="btn btn-secondary">Back to Home</Link>
